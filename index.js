@@ -15,7 +15,7 @@ app.use(express.urlencoded());
 app.use('/public', express.static(`${process.cwd()}/public`));
 
 app.get('/', function (req, res) {
-  res.sendFile(process.cwd() + '/views/index.html');
+  res.sendFile(process.cwd() + '/public/index.html');
 });
 
 let map = new Map();
@@ -23,7 +23,7 @@ let map = new Map();
 
 app.post('/api/shorturl', function (req, res) {
   const url = req.body['url']
-  const isValid = validUrl.isHttpUri(url);
+  const isValid = validUrl.isWebUri(url);
   if (isValid) {
     const number = Math.floor((Math.random() * 10000) + 1);
     map.set(number.toString(), url);
